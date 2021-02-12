@@ -5,18 +5,18 @@ import { ParsedUrlQuery } from 'querystring';
 
 import Layout from '../../components/layout';
 import {
-  getAllPostIds,
-  getPostData,
-  PostIdParams,
-  PostData,
-} from '../../server/lib/posts.service';
+  getAllEntitiesIds,
+  getEntityData,
+  EntityIdParams,
+  EntityData,
+} from '../../server/lib/entities.service';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
 import { getHomeDescriptionData } from '../../server/lib/home.service';
 
 // noinspection JSUnusedGlobalSymbols
-export const getStaticPaths: GetStaticPaths<PostIdParams & ParsedUrlQuery> = async () => {
-  const paths = getAllPostIds();
+export const getStaticPaths: GetStaticPaths<EntityIdParams & ParsedUrlQuery> = async () => {
+  const paths = getAllEntitiesIds();
 
   return {
     paths,
@@ -25,22 +25,22 @@ export const getStaticPaths: GetStaticPaths<PostIdParams & ParsedUrlQuery> = asy
 };
 
 // noinspection JSUnusedGlobalSymbols
-export const getStaticProps: GetStaticProps<PostProps, PostIdParams> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<EntityProps, EntityIdParams> = async ({ params }) => {
   const siteData = await getHomeDescriptionData();
-  const postData = await getPostData(params.id);
+  const postData = await getEntityData(params.id);
 
-  const props: PostProps = { postData, siteTitle: siteData.title };
+  const props: EntityProps = { postData, siteTitle: siteData.title };
 
   return { props };
 };
 
-interface PostProps {
-  postData: PostData;
+interface EntityProps {
+  postData: EntityData;
   siteTitle: string;
 }
 
 // noinspection JSUnusedGlobalSymbols
-export default function Post({ postData, siteTitle }: PostProps) {
+export default function Entity({ postData, siteTitle }: EntityProps) {
   return (
     <Layout siteTitle={ siteTitle }>
       <Head>

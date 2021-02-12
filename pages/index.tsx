@@ -5,13 +5,14 @@ import Link from 'next/link';
 
 import Layout from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import { getSortedPostsData, PostListItemData } from '../server/lib/posts.service';
+import { getSortedEntitiesData, EntityListItemData } from '../server/lib/entities.service';
 import Date from '../components/date';
 import { getHomeDescriptionData, HomeDescriptionData } from '../server/lib/home.service';
+import { getEntityHref } from '../server/lib/paths.utils';
 
 // noinspection JSUnusedGlobalSymbols
 export const getStaticProps: GetStaticProps<HomeProps, {}> = async () => {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = getSortedEntitiesData();
   const homeDescriptionData = await getHomeDescriptionData();
 
   const props: HomeProps = {
@@ -61,7 +62,7 @@ export default function Home(props: HomeProps) {
 }
 
 interface HomeProps {
-  allPostsData: PostListItemData[],
+  allPostsData: EntityListItemData[],
   homeDescriptionData: HomeDescriptionData,
 }
 
@@ -74,7 +75,7 @@ interface PostListItemProps {
 function PostListItem({ id, date, title }: PostListItemProps) {
   return (
     <li className={ utilStyles.listItem } key={ id }>
-      <Link href={ `/posts/${ id }` }>
+      <Link href={ getEntityHref(id) }>
         <a>
           { title }
         </a>

@@ -44,7 +44,7 @@ function LayoutHead({ siteTitle }: SiteTitleProvider) {
         { siteTitle }
       </title>
 
-      <link rel="icon" href="/favicon.ico"/>
+      <link rel="icon" href={ '/favicon.ico' }/>
 
       <meta
         name="description"
@@ -60,14 +60,14 @@ function LayoutHead({ siteTitle }: SiteTitleProvider) {
   );
 }
 
-interface SiteTitleProvider {
+export interface SiteTitleProvider {
   siteTitle: string,
 }
 
 function ProfileImage({ siteTitle }: SiteTitleProvider) {
   return (
     <img
-      src="/images/profile.jpg"
+      src={ '/images/profile.jpg' }
       className={ `${ styles.headerImage } ${ utilStyles.borderCircle }` }
       alt={ siteTitle }
     />

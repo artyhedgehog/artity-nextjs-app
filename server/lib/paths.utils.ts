@@ -3,34 +3,38 @@ import path from 'path';
 export enum Directory {
   SERVER = 'server',
   CONTENT = 'content',
-  POSTS = 'posts',
+  ENTITIES = 'entities',
 }
 
 export enum File {
   HOME_DESCRIPTION = 'home-description.md',
 }
 
-export const postsDirectory = path.join(
+export const entitiesDirectory = path.join(
   process.cwd(),
   Directory.SERVER,
   Directory.CONTENT,
-  Directory.POSTS,
+  Directory.ENTITIES,
 );
 
-export function getPostId(fileName: string) {
+export function getEntityId(fileName: string) {
   return fileName.replace(/\.md$/, '');
 }
 
-export function getPostFullPathByFileName(fileName: string) {
-  return path.join(postsDirectory, fileName);
+export function getEntityFullPathByFileName(fileName: string) {
+  return path.join(entitiesDirectory, fileName);
 }
 
-export function getPostFullPathById(id: string) {
+export function getEntityFullPathById(id: string) {
   const fileName = `${ id }.md`;
 
-  return getPostFullPathByFileName(fileName);
+  return getEntityFullPathByFileName(fileName);
 }
 
 export function getHomeFullPath() {
   return path.join(process.cwd(), Directory.SERVER, Directory.CONTENT, File.HOME_DESCRIPTION);
+}
+
+export function getEntityHref(id: string) {
+  return [null, Directory.ENTITIES, id].join('/');
 }
