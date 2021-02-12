@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
+import utilStyles from '../../styles/utils.module.css';
+import SearchBar from './SearchBar';
 
 export default function Layout({ children, home, siteTitle }: LayoutProps) {
   return (
@@ -15,6 +16,8 @@ export default function Layout({ children, home, siteTitle }: LayoutProps) {
       </header>
 
       <main>
+        <SearchBar/>
+
         { children }
       </main>
 

@@ -3,10 +3,10 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Layout from '../components/layout';
+import Layout from '../client/components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedEntitiesData, EntityListItemData } from '../server/lib/entities.service';
-import Date from '../components/date';
+import Date from '../client/components/date';
 import { getHomeDescriptionData, HomeDescriptionData } from '../server/lib/home.service';
 import { getEntityHref } from '../server/lib/paths.utils';
 
