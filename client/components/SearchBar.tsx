@@ -5,10 +5,7 @@ import SearchField from 'react-search-field';
 import { AppState } from '../../redux/store';
 import { setQuery } from '../../redux/ui/search';
 
-interface SearchBarProps {
-}
-
-const SearchBar: FC<SearchBarProps> = () => {
+const SearchBar: FC = () => {
   const query = useSelector((state: AppState) => state.ui.search.query);
   const dispatch = useDispatch();
   const handleChange = (value: string) => dispatch(setQuery(value));

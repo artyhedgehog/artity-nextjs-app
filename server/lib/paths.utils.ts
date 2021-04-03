@@ -4,6 +4,7 @@ export enum Directory {
   SERVER = 'server',
   CONTENT = 'content',
   ENTITIES = 'entities',
+  VIEWS = 'views',
 }
 
 export enum File {
@@ -35,6 +36,12 @@ export function getHomeFullPath() {
   return path.join(process.cwd(), Directory.SERVER, Directory.CONTENT, File.HOME_DESCRIPTION);
 }
 
+const buildRelativeHref = (directories: string[]): string => directories.join('/');
+
 export function getEntityHref(id: string) {
-  return [null, Directory.ENTITIES, id].join('/');
+  return buildRelativeHref([null, Directory.ENTITIES, id]);
+}
+
+export function getProjectsViewHref() {
+  return buildRelativeHref([null, Directory.VIEWS]);
 }

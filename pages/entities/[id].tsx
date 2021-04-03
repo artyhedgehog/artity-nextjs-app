@@ -3,14 +3,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 
-import Layout from '../../client/components/layout';
+import Layout from '../../client/components/Layout';
 import {
   getAllEntitiesIds,
   getEntityData,
   EntityIdParams,
   EntityData,
 } from '../../server/lib/entities.service';
-import Date from '../../client/components/date';
+import DateViewer from '../../client/components/DateViewer';
 import utilStyles from '../../styles/utils.module.css';
 import { getHomeDescriptionData } from '../../server/lib/home.service';
 
@@ -55,7 +55,7 @@ export default function Entity({ postData, siteTitle }: EntityProps) {
         </h1>
 
         <div className={ utilStyles.lightText }>
-          <Date dateString={ postData.date }/>
+          <DateViewer dateString={ postData.date }/>
         </div>
 
         <div dangerouslySetInnerHTML={ { __html: postData.contentHtml } }/>

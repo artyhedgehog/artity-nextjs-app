@@ -1,22 +1,23 @@
 import React from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Layout from '../client/components/layout';
+import Layout from '../client/components/Layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedEntitiesData, EntityListItemData } from '../server/lib/entities.service';
-import Date from '../client/components/date';
+import DateViewer from '../client/components/DateViewer';
 import { getHomeDescriptionData, HomeDescriptionData } from '../server/lib/home.service';
 import { getEntityHref } from '../server/lib/paths.utils';
+import EntityList from '../client/components/EntityList';
 
 // noinspection JSUnusedGlobalSymbols
-export const getStaticProps: GetStaticProps<HomeProps, {}> = async () => {
-  const allPostsData = getSortedEntitiesData();
+export const getServerSideProps: GetServerSideProps<HomeProps, {}> = async () => {
+  const allEntitiesData = getSortedEntitiesData();
   const homeDescriptionData = await getHomeDescriptionData();
 
   const props: HomeProps = {
-    allPostsData,
+    allEntitiesData: allEntitiesData,
     homeDescriptionData,
   };
   return {
@@ -27,7 +28,7 @@ export const getStaticProps: GetStaticProps<HomeProps, {}> = async () => {
 // noinspection JSUnusedGlobalSymbols
 export default function Home(props: HomeProps) {
   const {
-    allPostsData = [],
+    allEntitiesData = [],
     homeDescriptionData = {
       title: null,
       date: null,
@@ -48,44 +49,19 @@ export default function Home(props: HomeProps) {
         dangerouslySetInnerHTML={ { __html: homeDescriptionData.contentHtml } }
       />
 
-      <section className={ `${ utilStyles.headingMd } ${ utilStyles.padding1px }` }>
+      <main className={ `${ utilStyles.headingMd } ${ utilStyles.padding1px }` }>
         <h2 className={ utilStyles.headingLg }>
-          Blog
+          Entities
         </h2>
 
-        <ul className={ utilStyles.list }>
-          { allPostsData.map(PostListItem) }
-        </ul>
-      </section>
+        <EntityList />
+      </main>
     </Layout>
   );
 }
 
 interface HomeProps {
-  allPostsData: EntityListItemData[],
+  allEntitiesData: EntityListItemData[],
   homeDescriptionData: HomeDescriptionData,
 }
 
-interface PostListItemProps {
-  id: string,
-  date: string,
-  title: string,
-}
-
-function PostListItem({ id, date, title }: PostListItemProps) {
-  return (
-    <li className={ utilStyles.listItem } key={ id }>
-      <Link href={ getEntityHref(id) }>
-        <a>
-          { title }
-        </a>
-      </Link>
-
-      <br/>
-
-      <small className={ utilStyles.lightText }>
-        <Date dateString={ date }/>
-      </small>
-    </li>
-  );
-}

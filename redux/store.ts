@@ -3,13 +3,16 @@ import { MakeStore, createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { configureStore } from '@reduxjs/toolkit';
 
 import ui, { UiState } from './ui';
+import data, { DataState } from './data';
 
 export interface AppState {
   ui: UiState
+  data: DataState
 }
 
 const combinedReducer = combineReducers({
   ui,
+  data,
 });
 
 const reducer = (state, action) => {

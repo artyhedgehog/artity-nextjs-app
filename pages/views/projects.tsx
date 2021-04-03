@@ -1,4 +1,4 @@
-import Layout, { SiteTitleProvider } from '../../client/components/layout';
+import Layout, { SiteTitleProvider } from '../../client/components/Layout';
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { getHomeDescriptionData } from '../../server/lib/home.service';
