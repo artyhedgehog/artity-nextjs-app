@@ -8,6 +8,10 @@ export interface EntitySearchResponse {
 // @ts-ignore
 export async function requestEntitySearch(query: string): Promise<EntitySearchResponse> {
   // TODO: implement search request
+  return {
+    query,
+    entities: []
+  }
 }
 
 // export async function postMessages(data: ChatMessageData[]): Promise<void> {

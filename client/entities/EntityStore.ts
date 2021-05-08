@@ -1,8 +1,8 @@
-import indexBy from 'ramda/es/indexBy';
-import pipe from 'ramda/es/pipe';
-import mergeRight from 'ramda/es/mergeRight';
-import set from 'ramda/es/set';
-import lensProp from 'ramda/es/lensProp';
+import indexBy from 'ramda/src/indexBy';
+import pipe from 'ramda/src/pipe';
+import mergeRight from 'ramda/src/mergeRight';
+import set from 'ramda/src/set';
+import lensProp from 'ramda/src/lensProp';
 
 import { EntityId, EntityItem } from '../../common/entities.models';
 

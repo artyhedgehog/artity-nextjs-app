@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<ProjectsPageProps> = async (
 
 function ProjectItem({ id, title }: EntityListItemData) {
   return (
-    <section>
+    <section key={id}>
       <a href={ getEntityHref(id) }>
         <h2>
           { title }
