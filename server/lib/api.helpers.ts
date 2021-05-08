@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { HttpMethod, HttpStatusCode } from '../../common/models/http.models';
+
+import { HttpMethod, HttpStatusCode } from '../../common/http.models';
 
 export type Query = {
   [key: string]: string | string[];

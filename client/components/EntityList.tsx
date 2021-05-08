@@ -1,15 +1,15 @@
 import { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
 
 import utilStyles from '../../styles/utils.module.css';
 import { getEntityHref } from '../../server/lib/paths.utils';
-import { AppState } from '../../redux/store';
+import { AppState } from '../redux/store';
 import DateViewer from './DateViewer';
 
 const EntityList: FC = () => {
   const query = useSelector((state: AppState) => state.ui.search.query || '');
-  const allEntitiesData = useSelector((state: AppState) => state.data.searchedEntities[query]);
+  const allEntitiesData = useSelector((state: AppState) => state.data.entities[query]);
 
   if (!allEntitiesData) {
     return (<div>No entities found</div>)

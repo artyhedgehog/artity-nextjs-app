@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchField from 'react-search-field';
 
-import { AppState } from '../../redux/store';
-import { setQuery } from '../../redux/ui/search';
+import { AppState } from '../redux/store';
+import { setQuery } from '../redux/ui/search';
 
 const SearchBar: FC = () => {
   const query = useSelector((state: AppState) => state.ui.search.query);
