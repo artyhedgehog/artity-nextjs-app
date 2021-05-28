@@ -15,9 +15,9 @@ const entitiesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(searchEntities.fulfilled, ((state, action) => {
-      const { entities, query } = action.payload;
+      const { entities, searchQuery } = action.payload;
 
-      return state.setSearchResults(query, entities);
+      return state.setSearchResults(searchQuery, entities);
     }));
   },
 });

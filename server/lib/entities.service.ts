@@ -13,29 +13,6 @@ export interface EntityListItemData {
 }
 
 export function getSortedEntitiesData(filter: EntityFilter = {}): EntityListItemData[] {
-  const fileNames = getFileNames(entitiesDirectory);
-  const allEntitiesData = fileNames.map(fileName => {
-    const id = getEntityId(fileName);
-    const fullPath = getEntityFullPathByFileName(fileName);
-    const matterResult = parseMarkdownFileMatter(fullPath);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...matterResult.data,
-    } as EntityListItemData;
-  });
-
-  const filteredEntitiesData = allEntitiesData.filter<EntityListItemData>(doesEntityMatchFilter(filter));
-
-  // Sort entities by date
-  return filteredEntitiesData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
 }
 
 export interface EntityIdParams extends ParsedUrlQuery {

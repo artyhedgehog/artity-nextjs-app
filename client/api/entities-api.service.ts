@@ -1,16 +1,23 @@
 import { EntityItem } from '../../common/entities.models';
 
 export interface EntitySearchResponse {
-  query: string
+  searchQuery: string
   entities: EntityItem[]
 }
 
 // @ts-ignore
-export async function requestEntitySearch(query: string): Promise<EntitySearchResponse> {
-  // TODO: implement search request
+export async function requestEntitySearch(searchQuery: string): Promise<EntitySearchResponse> {
+  const params = { searchQuery };
+  const queryParams = Object.entries(params).map(([key, value]) => `${key}=${value}`)
+  const queryString = queryParams.length > 0 ? '?' + queryParams.join('&') : ''
+  const url = '/api/chat/messages' + queryString
+
+  const response = await fetch(url)
+  const responseBody = await response.json();
+
   return {
-    query,
-    entities: []
+    searchQuery,
+    entities: responseBody.entities as EntityItem[],
   }
 }
 
@@ -25,11 +32,4 @@ export async function requestEntitySearch(query: string): Promise<EntitySearchRe
 // }
 //
 // export async function getMessages(params: MessagesFetchParams): Promise<Record<'messages', ChatMessageModel[]>> {
-//   const queryParams = Object.entries(params).map(([key, value]) => `${key}=${value}`)
-//   const queryString = queryParams.length > 0 ? '?' + queryParams.join('&') : ''
-//   const url = '/api/chat/messages' + queryString
-//
-//   const response = await fetch(url)
-//
-//   return response.json()
 // }
